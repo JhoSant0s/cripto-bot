@@ -1,20 +1,20 @@
-# Usa uma imagem Node.js oficial
-FROM node:18-slim
+# Use Node.js oficial
+FROM node:18
 
-# Cria diretório de trabalho
+# Cria o diretório app
 WORKDIR /app
 
-# Copia os arquivos de package para instalar dependências
+# Copia os arquivos de dependência
 COPY package*.json ./
 
-# Instala dependências
+# Instala as dependências
 RUN npm install
 
-# Copia o restante dos arquivos para dentro do container
+# Copia o restante
 COPY . .
 
-# Expõe a porta (importante para a web rodar)
+# Exponha a porta
 EXPOSE 3000
 
-# Comando para iniciar o bot
+# Comando padrão
 CMD ["npm", "start"]

@@ -8,12 +8,11 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
-const PORT = process.env.PORT || 3000; // <- Use a porta do Railway se disponível
+const PORT = process.env.PORT || 3000;
 
 let totalAnalises = 0;
 let ultimaMoeda = 'Nenhuma ainda';
 
-// Correções de nome de criptos
 const correcoes = {
   btc: 'bitcoin',
   eth: 'ethereum',
@@ -55,24 +54,16 @@ venom
   .create(
     {
       session: 'cripto-bot',
-      headless: true, // <- Agora correto para nuvem
+      headless: true,
       devtools: false,
       disableSpins: true,
-      logQR: true,
+      logQR: false,
       autoClose: 0,
-      browserArgs: [
-        '--no-sandbox',
-        '--disable-setuid-sandbox',
-        '--disable-dev-shm-usage',
-        '--disable-accelerated-2d-canvas',
-        '--no-first-run',
-        '--no-zygote',
-        '--single-process',
-        '--disable-gpu'
-      ]
+      browserArgs: ['--no-sandbox', '--disable-setuid-sandbox']
     },
     (base64Qr, asciiQR) => {
-      console.log('📱 Escaneie o QR Code para conectar:\n', asciiQR);
+      console.log('📱 Escaneie o QR Code para conectar:
+', asciiQR);
     },
     (statusSession, session) => {
       console.log(`🛰 Status da sessão ${session}: ${statusSession}`);
@@ -105,7 +96,6 @@ function start(client) {
   });
 }
 
-// Painel Web
 app.get('/', (req, res) => {
   res.send(`
     <h1>🦉 Painel de Análises CriptoBot</h1>
