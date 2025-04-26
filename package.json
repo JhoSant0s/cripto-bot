@@ -1,0 +1,27 @@
+{
+  "name": "whatsapp-cripto-bot-v2",
+  "version": "1.0.0",
+  "description": "Bot de análise rápida de criptomoedas via WhatsApp usando Venom-Bot",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "axios": "^1.6.7",
+    "express": "^4.18.2",
+    "socket.io": "^4.7.5",
+    "venom-bot": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "whatsapp",
+    "bot",
+    "criptomoedas",
+    "venom",
+    "análise"
+  ],
+  "author": "Seu Nome",
+  "license": "MIT"
+}
