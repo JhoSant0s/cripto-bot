@@ -8,7 +8,7 @@ const app = express();
 const server = createServer(app);
 const io = new Server(server);
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000; // <- Use a porta do Railway se disponível
 
 let totalAnalises = 0;
 let ultimaMoeda = 'Nenhuma ainda';
@@ -51,18 +51,25 @@ async function buscarCriptomoeda(nome) {
   }
 }
 
-// <<< Aqui o venom-bot com HEADLESS FALSE
 venom
   .create(
     {
       session: 'cripto-bot',
-      headless: false, // <- Aqui corrigido: navegador visível
-      executablePath: 'C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe',
+      headless: true, // <- Agora correto para nuvem
       devtools: false,
       disableSpins: true,
       logQR: true,
       autoClose: 0,
-      browserArgs: ['--no-sandbox', '--disable-setuid-sandbox']
+      browserArgs: [
+        '--no-sandbox',
+        '--disable-setuid-sandbox',
+        '--disable-dev-shm-usage',
+        '--disable-accelerated-2d-canvas',
+        '--no-first-run',
+        '--no-zygote',
+        '--single-process',
+        '--disable-gpu'
+      ]
     },
     (base64Qr, asciiQR) => {
       console.log('📱 Escaneie o QR Code para conectar:\n', asciiQR);
