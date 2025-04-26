@@ -1,5 +1,5 @@
 {
-  "name": "whatsapp-cripto-bot-v2",
+  "name": "cripto-bot",
   "version": "1.0.0",
   "description": "Bot de análise rápida de criptomoedas via WhatsApp usando Venom-Bot",
   "main": "index.js",
