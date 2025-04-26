@@ -1,20 +1,20 @@
-# Use Node.js oficial
+# Usa imagem Node
 FROM node:18
 
-# Cria o diretório app
+# Define a pasta de trabalho
 WORKDIR /app
 
-# Copia os arquivos de dependência
+# Copia package.json e package-lock.json
 COPY package*.json ./
 
-# Instala as dependências
-RUN npm install
+# Instala apenas produção
+RUN npm install --production
 
-# Copia o restante
+# Copia os arquivos do projeto
 COPY . .
 
-# Exponha a porta
+# Expõe a porta do servidor (se usar painel Express)
 EXPOSE 3000
 
-# Comando padrão
+# Comando para iniciar
 CMD ["npm", "start"]

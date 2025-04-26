@@ -13,6 +13,7 @@ const PORT = process.env.PORT || 3000;
 let totalAnalises = 0;
 let ultimaMoeda = 'Nenhuma ainda';
 
+// Correções de nome de criptos
 const correcoes = {
   btc: 'bitcoin',
   eth: 'ethereum',
@@ -50,20 +51,21 @@ async function buscarCriptomoeda(nome) {
   }
 }
 
+// <<< Venom-Bot Configurado para headless true e sem chrome externo
 venom
   .create(
     {
       session: 'cripto-bot',
-      headless: true,
+      headless: true, // navegador invisível
+      useChrome: false, // não usar Chrome do sistema
       devtools: false,
       disableSpins: true,
-      logQR: false,
+      logQR: true,
       autoClose: 0,
       browserArgs: ['--no-sandbox', '--disable-setuid-sandbox']
     },
     (base64Qr, asciiQR) => {
-      console.log('📱 Escaneie o QR Code para conectar:
-', asciiQR);
+      console.log('📱 Escaneie o QR Code para conectar:\n', asciiQR);
     },
     (statusSession, session) => {
       console.log(`🛰 Status da sessão ${session}: ${statusSession}`);
@@ -96,6 +98,7 @@ function start(client) {
   });
 }
 
+// Painel Web para acompanhar
 app.get('/', (req, res) => {
   res.send(`
     <h1>🦉 Painel de Análises CriptoBot</h1>
@@ -112,6 +115,7 @@ app.get('/', (req, res) => {
   `);
 });
 
+// Iniciar servidor Web
 server.listen(PORT, () => {
   console.log(`🚀 Painel disponível em: http://localhost:${PORT}`);
 });
